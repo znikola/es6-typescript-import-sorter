@@ -1,0 +1,32 @@
+{
+  "name": "es6-typescript-import-sorter",
+  "version": "1.0.0",
+  "description": "Sort and group ES6 and TypeScript import statements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "contributors": [
+    "Nikola Zarić <nikola.zaric.ns@gmail.com> (https://github.com/znikola)",
+    "Louis Pierrestiger <louis.pierrestiger@gmail.com> (https://github.com/LTiger14)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znikola/es6-typescript-import-sorter.git"
+  },
+  "keywords": [
+    "imports",
+    "sort imports",
+    "order imports",
+    "group imports",
+    "TypeScript"
+  ],
+  "license": "SEE LICENCE IN LICENCE.md",
+  "bugs": {
+    "url": "https://github.com/znikola/es6-typescript-import-sorter/issues"
+  },
+  "homepage": "https://github.com/znikola/es6-typescript-import-sorter/blob/master/README.md",
+  "devDependencies": {
+    "prettier": "1.14.3"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    // Debugger for Chrome
+    "msjsdiag.debugger-for-chrome",
+    // Prettier - Code formatter
+    "esbenp.prettier-vscode",
+    // TSLint
+    "eg2.tslint",
+    // Validates packages.json file
+    "eg2.vscode-npm-script",
+    // live share for VS code
+    "ms-vsliveshare.vsliveshare",
+    "ms-vsliveshare.vsliveshare-audio",
+    // VSCode GitHub PR review
+    "github.vscode-pull-request-github",
+    // A theme that's the most pleasing to eyes
+    "wesbos.theme-cobalt2",
+    // highlights TODOs
+    "wayou.vscode-todo-highlight",
+    // Sorts import statements
+    "nikolazaric.es6-typescript-import-sorter"
+  ]
+}
