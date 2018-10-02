@@ -5,8 +5,10 @@
     "module": "commonjs",
     "outDir": "./dist",
     "typeRoots": ["node_modules/@types"],
-    "sourceMap": false,
-    "strict": true
+    "sourceMap": true,
+    "strict": true,
+    "alwaysStrict": true
   },
-  "include": ["./src/**.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

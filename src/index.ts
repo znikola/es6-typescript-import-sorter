@@ -1,24 +1,5 @@
-#!/usr/bin/env node
+import { doIt } from './lib/index';
 
-import './polyfills';
-import * as commander from 'commander';
-import chalk from 'chalk';
-
-import { doIt } from './import-sorter';
-
-commander.version('1.0.0').description('ES6 and TypeScript import sorter');
-
-commander
-  .command('sort-imports')
-  .alias('S')
-  .description('Sorts all imports')
-  .action(() => {
-    console.log(chalk.blueBright('=========*** Sorting imports... ***========='));
-    doIt();
-  });
-
-if (!process.argv.slice(2).length) {
-  commander.outputHelp();
-  process.exit();
+export function sort(filePath: string): void {
+  doIt();
 }
-commander.parse(process.argv);
