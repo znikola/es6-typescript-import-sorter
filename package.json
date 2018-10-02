@@ -2,7 +2,7 @@
   "name": "import-sorter",
   "version": "1.0.0",
   "description": "Sort and group ES6 and TypeScript import statements.",
-  "main": "./imports-sorter.js",
+  "main": "./import-sorter.js",
   "bin": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -4,7 +4,7 @@ import './polyfills';
 import * as commander from 'commander';
 import chalk from 'chalk';
 
-import { doIt } from './imports-sorter';
+import { doIt } from './import-sorter';
 
 commander.version('1.0.0').description('ES6 and TypeScript import sorter');
 
