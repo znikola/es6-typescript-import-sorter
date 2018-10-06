@@ -10,12 +10,6 @@ TODO:
 - it seems to me that we are importing the whole `core-js` lib in `polyfills.ts`. That's fine only if we can tree-shake it when building for `prod`. Not sure this is the case right now.
 - Hence, it might be better to read a bit about polyfills and figure out which ones do we need.
 
-# TSlint
-
-- add library
-- add tslint.json
-- configure it
-
 # Docs
 
 - write a dev guide how to develop
@@ -37,7 +31,7 @@ After testing, make sure to unlink import-sorter, by navigating to it and `yarn 
 
 # Future
 
-- Add the sort-imports lib as a dependency here, and execute it
-- As we are using TS, create `typings.d.ts` file (or similar) to export relevant types.
-- An option to specify a path or a file(s) in which to sort imports. If no option is specified, run on all files
-- Create a Config interface that can be passed if the lib is used
+- Run the sort-imports on our code base(s)
+- An option to specify a path or a file(s) in which to sort imports. If no option is specified, run on all files.
+  - Maybe use this: https://nodejs.org/api/path.html#path_path_isabsolute_path
+  - We can maybe use one `files` argument, which can be an array of either directories or files. If it's a file, run the lib on it. If it's a directory, run the lib on the files inside it. Optionally, if `recursive` flag is up, continue to iterate through directories recursevly

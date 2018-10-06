@@ -2,7 +2,6 @@ import * as program from 'commander';
 import * as chalk from 'chalk';
 
 import { doIt } from '../lib';
-import { SortingConfig } from '../lib/config/lib-config.model';
 import { CliConfigUtil } from './cli-config-util';
 import { FileUtils } from '../lib/file-utils/file-utils';
 import * as fs from 'fs';
@@ -32,11 +31,49 @@ export function run(): void {
   ).createConfig();
 
   console.log(chalk.default.blueBright('=========*** Sorting imports... ***========='));
-  const files = doIt(config);
+  doIt(config);
 
+  console.log(chalk.default.blueBright('===========*** Saving files... ***==========='));
   if (!config.dryRun) {
     saveFiles([]);
   }
 }
 
-function saveFiles(files: string[]): void {}
+const NEW_LINE = '\n';
+
+function saveFiles(_files: string[]): void {
+  const path = 'path-to-file';
+  const startPosition = 0;
+  const endPosition = 18;
+
+  let content = FileUtils.readFile(path);
+  console.log(`${NEW_LINE}${NEW_LINE}${NEW_LINE}`);
+  console.log(`content BEFORE ${NEW_LINE}`, content);
+
+  const ar = content.split(NEW_LINE);
+  console.log(`array elements:`);
+  for (let i = 0; i < ar.length; i++) {
+    console.log(`${i}: ${ar[i]}`);
+  }
+
+  let newImports = '';
+  // for (let i = 0; i < 20; i++) {
+  //   newImports += 'new import \n';
+  // }
+
+  for (let i = 0; i < 10; i++) {
+    newImports += 'new import \n';
+  }
+
+  content = replaceImports(content, startPosition, endPosition, newImports);
+  console.log(`${NEW_LINE}${NEW_LINE}${NEW_LINE}`);
+  console.log(`content AFTER ${NEW_LINE}`, content);
+
+  fs.writeFileSync(path, content);
+}
+
+function replaceImports(content: string, startPosition: number, endPosition: number, newImports: string): string {
+  let splitted = content.split(NEW_LINE);
+  splitted.splice(startPosition, endPosition, ...newImports.split(NEW_LINE));
+  return splitted.join(NEW_LINE);
+}
