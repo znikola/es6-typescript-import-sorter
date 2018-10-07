@@ -1,16 +1,7 @@
 'use strict';
 
 import { Import, Type } from '../models/import';
-import {
-  determineForwardHierarchyLevel,
-  normalizePath,
-  isBackwardsPath,
-  isCurrentPath,
-  startsWithAT,
-  isLibrary,
-  isForwardPath,
-  FOLDER_PATH
-} from '../utils/import-util';
+import { ImportUtils, FOLDER_PATH } from '../utils/import-util';
 import { validArray, validString } from '../utils/validation';
 
 /** used for Array.sort */
@@ -96,25 +87,25 @@ function handleLibraries(first: string, second: string): number {
     return INVALID_OR_ERROR;
   }
 
-  if (isLibrary(first) && !isLibrary(second)) {
+  if (ImportUtils.isLibrary(first) && !ImportUtils.isLibrary(second)) {
     return FIRST_BEFORE_SECOND;
   }
 
-  if (!isLibrary(first) && isLibrary(second)) {
+  if (!ImportUtils.isLibrary(first) && ImportUtils.isLibrary(second)) {
     return FIRST_AFTER_SECOND;
   }
 
   // if 'first' and/or 'second' start with '@', sort them before the rest
-  if (startsWithAT(first) || startsWithAT(second)) {
-    if (startsWithAT(first) && startsWithAT(second)) {
+  if (ImportUtils.startsWithAT(first) || ImportUtils.startsWithAT(second)) {
+    if (ImportUtils.startsWithAT(first) && ImportUtils.startsWithAT(second)) {
       return sortAT(first, second);
     }
 
-    if (startsWithAT(first)) {
+    if (ImportUtils.startsWithAT(first)) {
       return FIRST_BEFORE_SECOND;
     }
 
-    if (startsWithAT(second)) {
+    if (ImportUtils.startsWithAT(second)) {
       return FIRST_AFTER_SECOND;
     }
 
@@ -163,16 +154,16 @@ function handleBackwardsPath(first: string, second: string): number {
     return INVALID_OR_ERROR;
   }
 
-  first = normalizePath(first);
-  second = normalizePath(second);
+  first = ImportUtils.normalizePath(first);
+  second = ImportUtils.normalizePath(second);
 
-  if (isForwardPath(second)) {
+  if (ImportUtils.isForwardPath(second)) {
     return FIRST_BEFORE_SECOND;
   }
-  if (isCurrentPath(second)) {
+  if (ImportUtils.isCurrentPath(second)) {
     return FIRST_AFTER_SECOND;
   }
-  if (isBackwardsPath(second)) {
+  if (ImportUtils.isBackwardsPath(second)) {
     return handleBothBackwardsPaths(first, second);
   }
 
@@ -185,16 +176,16 @@ function handleCurrentPath(first: string, second: string): number {
     return INVALID_OR_ERROR;
   }
 
-  first = normalizePath(first);
-  second = normalizePath(second);
+  first = ImportUtils.normalizePath(first);
+  second = ImportUtils.normalizePath(second);
 
-  if (isBackwardsPath(second)) {
+  if (ImportUtils.isBackwardsPath(second)) {
     return FIRST_AFTER_SECOND;
   }
-  if (isForwardPath(second)) {
+  if (ImportUtils.isForwardPath(second)) {
     return FIRST_BEFORE_SECOND;
   }
-  if (isCurrentPath(second)) {
+  if (ImportUtils.isCurrentPath(second)) {
     return handleBothCurrentPaths(first, second);
   }
 
@@ -207,13 +198,13 @@ function handleForwardPath(first: string, second: string): number {
     return INVALID_OR_ERROR;
   }
 
-  first = normalizePath(first);
-  second = normalizePath(second);
+  first = ImportUtils.normalizePath(first);
+  second = ImportUtils.normalizePath(second);
 
-  if (isBackwardsPath(second) || isCurrentPath(second)) {
+  if (ImportUtils.isBackwardsPath(second) || ImportUtils.isCurrentPath(second)) {
     return FIRST_AFTER_SECOND;
   }
-  if (isForwardPath(second)) {
+  if (ImportUtils.isForwardPath(second)) {
     return handleBothForwardPaths(first, second);
   }
 
@@ -285,8 +276,8 @@ function handleBothForwardPaths(first: string, second: string): number {
     return INVALID_OR_ERROR;
   }
 
-  const levelFirst = determineForwardHierarchyLevel(first);
-  const levelSecond = determineForwardHierarchyLevel(second);
+  const levelFirst = ImportUtils.determineForwardHierarchyLevel(first);
+  const levelSecond = ImportUtils.determineForwardHierarchyLevel(second);
 
   if (levelFirst === levelSecond) {
     return sortAlphabetically(first, second);

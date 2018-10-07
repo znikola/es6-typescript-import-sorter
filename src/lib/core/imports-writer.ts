@@ -5,7 +5,7 @@ import { ImportGroup } from '../models/import-group';
 import { Range, NEW_LINE } from '../models/position';
 import { validArray } from '../utils/validation';
 
-export function getRange(importGroups: ImportGroup[], oldImports: Import[]): { range: Range; text: string } {
+export function write(importGroups: ImportGroup[], oldImports: Import[]): { range: Range; text: string } {
   if (!validArray(importGroups) || !validArray(oldImports)) {
     return { range: <Range>{}, text: '' };
   }
