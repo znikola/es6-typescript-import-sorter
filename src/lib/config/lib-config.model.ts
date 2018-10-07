@@ -1,3 +1,5 @@
+'use strict';
+
 export interface SortingConfig {
   /** a path to a directory containing files to sort imports in */
   directoryPath?: string;

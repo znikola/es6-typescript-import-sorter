@@ -1,10 +1,15 @@
-import * as program from 'commander';
+'use strict';
+
+import * as fs from 'fs';
+
 import * as chalk from 'chalk';
 
+import * as program from 'commander';
+
 import { doIt } from '../lib';
+import { FileUtils } from '../lib/utils/file-utils';
+
 import { CliConfigUtil } from './cli-config-util';
-import { FileUtils } from '../lib/file-utils/file-utils';
-import * as fs from 'fs';
 
 export function run(): void {
   program

@@ -1,3 +1,5 @@
+'use strict';
+
 import { SortingConfig } from '../lib/config/lib-config.model';
 
 export class CliConfigUtil {
