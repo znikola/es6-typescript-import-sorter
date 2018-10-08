@@ -1,16 +1,19 @@
 {
-  "name": "import-sorter",
-  "version": "1.0.0",
-  "description": "Sort and group ES6 and TypeScript import statements.",
-  "main": "./dist/index.js",
+  "name": "@imports/sort",
+  "version": "1.0.0-alpha.0",
+  "description": "An opinionated ES6 and TypeScript import sorter.",
+  "main": "dist/lib/index.js",
+  "types": "index.d.ts",
   "bin": {
     "import-sorter": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "yarn build -watch -p ./",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "build:prod": "yarn build -p ./tsconfig.production.json",
-    "watch": "yarn build -watch -p ./"
+    "prepublish": "yarn build:prod"
   },
   "contributors": [
     "Nikola Zarić <nikola.zaric.ns@gmail.com> (https://github.com/znikola)",
@@ -42,6 +45,7 @@
     "@types/node": "^10.11.3",
     "prettier": "1.14.3",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.1.1",
+    "rimraf": "^2.6.2"
   }
 }

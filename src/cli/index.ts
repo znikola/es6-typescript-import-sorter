@@ -36,7 +36,7 @@ export function run(): void {
   ).createConfig();
 
   console.log(chalk.default.blueBright('=========*** Sorting imports... ***========='));
-  sortImports(config);
+  sortImports('', config);
 
   console.log(chalk.default.blueBright('===========*** Saving files... ***==========='));
   if (!config.dryRun) {

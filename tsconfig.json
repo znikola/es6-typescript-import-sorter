@@ -4,6 +4,8 @@
     "lib": ["es2017", "es2015", "dom", "es6"],
     "module": "commonjs",
     "outDir": "./dist",
+    "declaration": true,
+    // "declarationDir": "dist/types",
     "typeRoots": ["node_modules/@types"],
     "sourceMap": true,
     "strict": true,
@@ -11,6 +13,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
   },
-  "include": ["**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

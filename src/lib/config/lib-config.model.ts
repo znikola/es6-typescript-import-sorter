@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * A config for sorting
+ */
 export interface SortingConfig {
   /** a path to a directory containing files to sort imports in */
   directoryPath?: string;
@@ -9,7 +12,7 @@ export interface SortingConfig {
   sortModules?: boolean;
   /** an array of file paths  */
   files?: string[];
-  /** when set, it doesn't save files */
+  /** when set, it doesn't apply changes */
   dryRun?: boolean;
 }
 

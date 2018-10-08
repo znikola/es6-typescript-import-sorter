@@ -22,7 +22,7 @@ TODO:
 
 ```
 const lib = require('import-sorter');
-lib.sort();
+lib.sortImports();
 ```
 
 After testing, make sure to unlink import-sorter, by navigating to it and `yarn unlink`
