@@ -1,5 +1,5 @@
 {
-  "name": "@imports/sort",
+  "name": "import-sorter",
   "version": "1.0.0-alpha.0",
   "description": "An opinionated ES6 and TypeScript import sorter.",
   "main": "dist/lib/index.js",
@@ -13,7 +13,7 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "build:prod": "yarn build -p ./tsconfig.production.json",
-    "prepublish": "yarn build:prod"
+    "prepare": "yarn build:prod"
   },
   "contributors": [
     "Nikola Zarić <nikola.zaric.ns@gmail.com> (https://github.com/znikola)",
