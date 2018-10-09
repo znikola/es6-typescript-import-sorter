@@ -1,7 +1,5 @@
 'use strict';
 
-import '../polyfills';
-
 import { SortingConfig } from './config';
 import { groupImports } from './core/group-imports';
 import { write } from './core/imports-writer';

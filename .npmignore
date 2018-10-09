@@ -6,3 +6,5 @@ tsconfig.production.json
 tslint.json
 .prettierrc
 .prettierignore
+node_modules
+src

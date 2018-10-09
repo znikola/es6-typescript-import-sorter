@@ -1,9 +1,9 @@
 {
   "name": "import-sorter",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "An opinionated ES6 and TypeScript import sorter.",
   "main": "dist/lib/index.js",
-  "types": "index.d.ts",
+  "types": "dist/import-sorter.d.ts",
   "bin": {
     "import-sorter": "./bin/index.js"
   },
@@ -38,7 +38,6 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.18.0",
-    "core-js": "^2.5.7",
     "fs": "0.0.1-security"
   },
   "devDependencies": {
