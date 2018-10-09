@@ -9,7 +9,7 @@ import { Import } from './models/import';
 import { ImportGroup } from './models/import-group';
 import { Range } from './models/position';
 
-// TODO: change the return type to be a list of files
+// TODO: change the return type to be a list of files. Also, define a proper type instead of an inline one
 // TODO: define another name when importing, instead of 'import-sorter'
 // TODO: it seems that types/index.d.ts is going to be deleted. move comments to the corresponding files
 

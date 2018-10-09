@@ -10,6 +10,10 @@
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "baseUrl": "src",
+    "paths": {
+      "import-sorter": ["lib/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules"]
