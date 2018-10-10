@@ -4,13 +4,17 @@
     "lib": ["es2017", "es2015", "dom", "es6"],
     "module": "commonjs",
     "outDir": "./dist",
-    "typeRoots": ["node_modules/@types"],
+    "declaration": true,
     "sourceMap": true,
     "strict": true,
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "baseUrl": "src",
+    "paths": {
+      "import-sorter": ["lib/*"]
+    }
   },
-  "include": ["**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

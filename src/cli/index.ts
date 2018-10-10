@@ -6,7 +6,7 @@ import * as chalk from 'chalk';
 
 import * as program from 'commander';
 
-import { doIt } from '../lib';
+import { sortImports } from '../lib';
 import { FileUtils } from '../lib/utils/file-utils';
 
 import { CliConfigUtil } from './cli-config-util';
@@ -36,7 +36,7 @@ export function run(): void {
   ).createConfig();
 
   console.log(chalk.default.blueBright('=========*** Sorting imports... ***========='));
-  doIt(config);
+  sortImports('', config);
 
   console.log(chalk.default.blueBright('===========*** Saving files... ***==========='));
   if (!config.dryRun) {

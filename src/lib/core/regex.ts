@@ -2,7 +2,7 @@
 
 import { Import } from '../models/import';
 import { Position, NEW_LINE } from '../models/position';
-import { determineType } from '../utils/import-util';
+import { ImportUtils } from '../utils/import-util';
 import { validString } from '../utils/validation';
 
 const ES6_IMPORTS_REGEX = /^import(?:["'\s]*(?:[\w*{}\n\r\t, ]+)from\s*)?(["'\s].*(?:[@\w\/\_\-.]+)["'\s]).*;\ */gm;
@@ -26,7 +26,7 @@ export function parse(content: string): Import[] {
     const newImport: Import = {
       statement: match[0],
       from,
-      type: determineType(from),
+      type: ImportUtils.determineType(from),
       startPosition,
       endPosition
     };
