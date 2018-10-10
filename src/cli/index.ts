@@ -1,24 +1,84 @@
-import * as commander from 'commander';
-import chalk from 'chalk';
+'use strict';
+
+import * as fs from 'fs';
+
+import * as chalk from 'chalk';
+
+import * as program from 'commander';
 
 import { doIt } from '../lib';
+import { FileUtils } from '../lib/utils/file-utils';
+
+import { CliConfigUtil } from './cli-config-util';
 
 export function run(): void {
-  commander.parse(process.argv);
+  program
+    .version('1.0.0')
+    .description('ES6 and TypeScript import sorter')
+    .option('-p, --path <path>', 'specify a path with files to sort imports in')
+    .option('-r, --recursive', 'sort recursively')
+    .option('-m, --modules', 'sort modules')
+    .option('-f, --files <files>', 'specify a comma-separated list of files to sort imports in ')
+    .option('-d, --dry-run', 'when set, it does not save files')
+    .parse(process.argv);
+
+  if (!process.argv.slice(2).length) {
+    program.outputHelp((help: string) => chalk.default.yellow(help));
+    process.exit();
+  }
+
+  const config = new CliConfigUtil(
+    program.path,
+    program.recursive,
+    program.modules,
+    program.files,
+    program.dryRun
+  ).createConfig();
+
+  console.log(chalk.default.blueBright('=========*** Sorting imports... ***========='));
+  doIt(config);
+
+  console.log(chalk.default.blueBright('===========*** Saving files... ***==========='));
+  if (!config.dryRun) {
+    saveFiles([]);
+  }
 }
 
-commander.version('1.0.0').description('ES6 and TypeScript import sorter');
+const NEW_LINE = '\n';
 
-commander
-  .command('sort-imports')
-  .alias('S')
-  .description('Sorts all imports')
-  .action(() => {
-    console.log(chalk.blueBright('=========*** Sorting imports... ***========='));
-    doIt();
-  });
+function saveFiles(_files: string[]): void {
+  const path = 'path-to-file';
+  const startPosition = 0;
+  const endPosition = 18;
 
-if (!process.argv.slice(2).length) {
-  commander.outputHelp();
-  process.exit();
+  let content = FileUtils.readFile(path);
+  console.log(`${NEW_LINE}${NEW_LINE}${NEW_LINE}`);
+  console.log(`content BEFORE ${NEW_LINE}`, content);
+
+  const ar = content.split(NEW_LINE);
+  console.log(`array elements:`);
+  for (let i = 0; i < ar.length; i++) {
+    console.log(`${i}: ${ar[i]}`);
+  }
+
+  let newImports = '';
+  // for (let i = 0; i < 20; i++) {
+  //   newImports += 'new import \n';
+  // }
+
+  for (let i = 0; i < 10; i++) {
+    newImports += 'new import \n';
+  }
+
+  content = replaceImports(content, startPosition, endPosition, newImports);
+  console.log(`${NEW_LINE}${NEW_LINE}${NEW_LINE}`);
+  console.log(`content AFTER ${NEW_LINE}`, content);
+
+  fs.writeFileSync(path, content);
+}
+
+function replaceImports(content: string, startPosition: number, endPosition: number, newImports: string): string {
+  let splitted = content.split(NEW_LINE);
+  splitted.splice(startPosition, endPosition, ...newImports.split(NEW_LINE));
+  return splitted.join(NEW_LINE);
 }

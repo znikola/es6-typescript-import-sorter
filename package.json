@@ -35,7 +35,8 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.18.0",
-    "core-js": "^2.5.7"
+    "core-js": "^2.5.7",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "@types/node": "^10.11.3",

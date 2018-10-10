@@ -1,5 +1,8 @@
-import { doIt } from './lib/index';
+'use strict';
 
-export function sort(filePath: string): void {
-  doIt();
+import { doIt } from './lib/index';
+import { SortingConfig } from './lib/config/lib-config.model';
+
+export function sort(config: SortingConfig): void {
+  doIt(config);
 }

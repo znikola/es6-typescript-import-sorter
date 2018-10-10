@@ -1,5 +1,9 @@
+'use strict';
+
 import '../polyfills';
 
-export function doIt(): void {
-  console.log(`doing stuff`);
+import { SortingConfig } from './config/lib-config.model';
+
+export function doIt(config: SortingConfig): void {
+  console.log(`config`, config);
 }
