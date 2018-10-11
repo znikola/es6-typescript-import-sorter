@@ -1,6 +1,6 @@
 {
   "name": "import-sorter",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "An opinionated ES6 and TypeScript import sorter.",
   "main": "dist/lib/index.js",
   "types": "dist/import-sorter.d.ts",
