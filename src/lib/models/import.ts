@@ -54,3 +54,11 @@ export interface Import {
   /** Ending position */
   endPosition: Position;
 }
+
+/**
+ * An import group
+ */
+export interface ImportGroup {
+  /** all the imports from the same group */
+  imports: Import[];
+}

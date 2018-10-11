@@ -1,12 +1,12 @@
 'use strict';
 
 import { SortingConfig } from './config';
+
 import { groupImports } from './core/group-imports';
 import { write } from './core/imports-writer';
 import { parse } from './core/regex';
 import { sort } from './core/sorting';
-import { Import } from './models/import';
-import { ImportGroup } from './models/import-group';
+import { Import, ImportGroup } from './models/import';
 import { Range } from './models/position';
 
 // TODO: change the return type to be a list of files. Also, define a proper type instead of an inline one

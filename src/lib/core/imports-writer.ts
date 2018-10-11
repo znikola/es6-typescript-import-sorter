@@ -1,7 +1,6 @@
 'use strict';
 
-import { Import } from '../models/import';
-import { ImportGroup } from '../models/import-group';
+import { Import, ImportGroup } from '../models/import';
 import { Range, NEW_LINE } from '../models/position';
 import { validArray } from '../utils/validation';
 
