@@ -1,6 +1,6 @@
 'use strict';
 
-import { Position } from './position';
+import { Position, Range } from './position';
 
 /**
  * An import type.
@@ -61,4 +61,14 @@ export interface Import {
 export interface ImportGroup {
   /** all the imports from the same group */
   imports: Import[];
+}
+
+/**
+ * Models a JS/TS file
+ */
+export interface ImportFile {
+  /** sorted imports */
+  sortedImports: string;
+  /** a range of import positions; used when replacing original imports with the sorted ones. */
+  range: Range;
 }

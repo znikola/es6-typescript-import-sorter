@@ -1,5 +1,6 @@
 'use strict';
 
+import { SortingConfig } from '../config/lib-config.model';
 import { Import, Type } from '../models/import';
 import { ImportUtils, FOLDER_PATH } from '../utils/import-util';
 import { validArray, validString } from '../utils/validation';
@@ -15,7 +16,7 @@ const INVALID_OR_ERROR = 0;
 
 const FOLDER_PATH_REGEX = new RegExp(FOLDER_PATH, 'g');
 
-export function sort(imports: Import[]): Import[] {
+export function sort(imports: Import[], _config: SortingConfig): Import[] {
   if (!validArray(imports)) {
     return [];
   }

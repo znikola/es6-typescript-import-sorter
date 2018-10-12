@@ -1,28 +1,44 @@
 import * as fs from 'fs';
 
+import * as path from 'path';
+
 const UTF_8 = 'utf8';
 
 export class FileUtils {
-  static isDirectory(path: string): boolean {
-    return fs.existsSync(path) && fs.lstatSync(path).isDirectory();
+  static isDirectory(directoryPath: string): boolean {
+    return fs.existsSync(directoryPath) && fs.lstatSync(directoryPath).isDirectory();
   }
 
-  static isFile(path: string): boolean {
-    return fs.existsSync(path) && fs.lstatSync(path).isFile();
+  static isFile(filePath: string): boolean {
+    return fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
   }
 
-  static readFile(path: string): string {
-    if (this.isFile(path)) {
-      return fs.readFileSync(path, { encoding: UTF_8 });
+  static readFile(filePath: string): string {
+    if (this.isFile(filePath)) {
+      return fs.readFileSync(filePath, { encoding: UTF_8 });
     }
 
     // TODO: return empty string in this case?
     return '';
   }
 
-  static saveFile(path: string, content: string): void {
-    if (this.isFile(path)) {
-      fs.writeFileSync(path, content, { encoding: UTF_8 });
+  static readDirectory(directoryPath: string, recursive: boolean, filePaths?: string[]): string[] {
+    filePaths = filePaths || [];
+    const files = fs.readdirSync(directoryPath);
+    for (const f in files) {
+      const name = directoryPath + path.sep + files[f];
+      if (this.isDirectory(name) && recursive) {
+        this.readDirectory(name, recursive, filePaths);
+      } else {
+        filePaths = [...filePaths, name];
+      }
+    }
+    return filePaths;
+  }
+
+  static saveFile(filePath: string, content: string): void {
+    if (this.isFile(filePath)) {
+      fs.writeFileSync(filePath, content, { encoding: UTF_8 });
     }
   }
 }
