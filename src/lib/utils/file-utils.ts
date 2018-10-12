@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-
 import * as path from 'path';
 
 const UTF_8 = 'utf8';

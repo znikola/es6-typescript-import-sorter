@@ -3,9 +3,10 @@
 import * as program from 'commander';
 
 import { SortingConfig } from '../lib/config/lib-config.model';
-import { CliConfigUtil } from './cli-config-util';
-import { cliSort } from './cli';
 import { LogUtils } from '../lib/utils/log-utils';
+
+import { cliSort } from './cli';
+import { CliConfigUtil } from './cli-config-util';
 
 export function run(): void {
   program

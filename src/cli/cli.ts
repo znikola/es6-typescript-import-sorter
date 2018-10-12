@@ -2,10 +2,10 @@
 
 import { sortImports } from '../lib';
 import { SortingConfig } from '../lib/config/lib-config.model';
+import { ImportFile } from '../lib/models/import';
+import { NEW_LINE, Position } from '../lib/models/position';
 import { FileUtils } from '../lib/utils/file-utils';
 import { LogUtils } from '../lib/utils/log-utils';
-import { NEW_LINE, Position } from '../lib/models/position';
-import { ImportFile } from '../lib/models/import';
 
 export function cliSort(config: SortingConfig) {
   let filePaths: string[] = [];

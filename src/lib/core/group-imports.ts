@@ -1,7 +1,7 @@
 'use strict';
 
-import { Import, ImportGroup, Type } from '../models/import';
 import { SortingConfig } from '../config/lib-config.model';
+import { Import, ImportGroup, Type } from '../models/import';
 
 export function groupImports(imports: Import[], _config: SortingConfig): ImportGroup[] {
   const libraries = imports.filter((i: Import) => i.type === Type.LIBRARY);
