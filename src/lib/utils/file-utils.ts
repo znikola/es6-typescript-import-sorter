@@ -2,6 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const UTF_8 = 'utf8';
+const TYPESCRIPT_EXTENSION = 'ts';
+const JAVASCRIPT_EXTENSION = 'js';
 
 export class FileUtils {
   static isDirectory(directoryPath: string): boolean {
@@ -21,6 +23,7 @@ export class FileUtils {
     return '';
   }
 
+  // TODO: doesn't work for recursive
   static readDirectory(directoryPath: string, recursive: boolean, filePaths?: string[]): string[] {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
@@ -29,7 +32,9 @@ export class FileUtils {
       if (this.isDirectory(name) && recursive) {
         this.readDirectory(name, recursive, filePaths);
       } else {
-        filePaths = [...filePaths, name];
+        if (this.isValidFile(name)) {
+          filePaths = [...filePaths, name];
+        }
       }
     }
     return filePaths;
@@ -39,5 +44,10 @@ export class FileUtils {
     if (this.isFile(filePath)) {
       fs.writeFileSync(filePath, content, { encoding: UTF_8 });
     }
+  }
+
+  static isValidFile(filePath: string): boolean {
+    const extension = filePath.split('.').pop();
+    return extension === TYPESCRIPT_EXTENSION || extension === JAVASCRIPT_EXTENSION;
   }
 }

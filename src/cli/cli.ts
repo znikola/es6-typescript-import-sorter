@@ -9,23 +9,19 @@ import { LogUtils } from '../lib/utils/log-utils';
 
 export function cliSort(config: SortingConfig) {
   let filePaths: string[] = [];
-  if (config.files) {
+  if (config.files && config.files.length > 0) {
     // TODO: move to FileUtils
     for (const path of config.files) {
-      if (FileUtils.isFile(path)) {
+      if (FileUtils.isFile(path) && FileUtils.isValidFile(path)) {
         filePaths = [...filePaths, path];
       } else {
         LogUtils.warn(`Skipping, file doesn't exist: `, path);
       }
     }
   } else if (config.directoryPath) {
-    if (config.directoryPath) {
-      // TODO: Boolean(config.recursive) is a temporary solution because TS reports a possibly `undefined` value
-      const files = FileUtils.readDirectory(config.directoryPath, Boolean(config.recursive));
-      filePaths = [...filePaths, ...files];
-    } else {
-      LogUtils.warn(`Skipping, directory doesn't exist: `, config.directoryPath);
-    }
+    // TODO: Boolean(config.recursive) is a temporary solution because TS reports a possibly `undefined` value
+    const files = FileUtils.readDirectory(config.directoryPath, Boolean(config.recursive));
+    filePaths = [...filePaths, ...files];
   }
 
   for (const path of filePaths) {
@@ -45,16 +41,28 @@ export function cliSort(config: SortingConfig) {
 
     if (!config.dryRun) {
       FileUtils.saveFile(path, newContent);
-    } else {
-      LogUtils.info('Sorted: ', path);
-      LogUtils.info(newContent);
     }
+
+    if (importsChanged(originalContent, newContent)) {
+      printSorted(path, newContent, config.printOutput);
+    }
+  }
+}
+
+function importsChanged(originalContent: string, newContent: string): boolean {
+  return originalContent !== newContent;
+}
+
+function printSorted(path: string, newContent: string, printOutput: boolean | undefined): void {
+  if (printOutput) {
+    LogUtils.info('Sorted: ', path);
+    LogUtils.info(newContent);
   }
 }
 
 // TODO: move somewhere?
 function replaceImports(content: string, startPosition: Position, endPosition: Position, newImports: string): string {
   const splitted = content.split(NEW_LINE);
-  splitted.splice(startPosition.line, endPosition.line, ...newImports.split(NEW_LINE));
+  splitted.splice(startPosition.line, endPosition.line + 1, ...newImports.split(NEW_LINE));
   return splitted.join(NEW_LINE);
 }

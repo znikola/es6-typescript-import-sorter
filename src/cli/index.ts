@@ -18,6 +18,7 @@ export function run(): void {
     .option('-m, --modules', 'sort modules')
     .option('-f, --files <files>', 'specify a comma-separated list of files to sort imports in ')
     .option('-d, --dry-run', 'when set, it does not save files')
+    .option('-o, --print-output', 'prints sorted files to the console')
     .parse(process.argv);
 
   const config: SortingConfig = new CliConfigUtil(
@@ -26,9 +27,11 @@ export function run(): void {
     program.recursive,
     program.modules,
     program.files,
-    program.dryRun
+    program.dryRun,
+    program.printOutput
   ).createConfig();
 
   LogUtils.info('=========*** Sorting imports... ***=========');
   cliSort(config);
+  LogUtils.info('================*** Done ***================');
 }

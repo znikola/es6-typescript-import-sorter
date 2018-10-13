@@ -14,6 +14,21 @@ TODO:
 * Quick and dirty way to run cli version: `./node_modules/.bin/ts-node ./bin/index.js`
 * `yarn build:prod` for a production build
 
+## Debugging the CLI
+
+- Temporarly add a call to `cliSort` function from `src/cli/index.ts` with a desired configuration, i.e.:
+
+```
+cliSort({
+  content: '',
+  dryRun: true
+});
+```
+
+_Note_ - in this way, the configuration binding is being skipped, and it can't be relied on the default value. Thus, all desired configuration value have to be explicitly specified.
+
+- Use the VSCode's `launch.json` and launch the `Launch Program` configuration
+
 # Future
 
 - An option to specify a path or a file(s) in which to sort imports. If no option is specified, run on all files.
