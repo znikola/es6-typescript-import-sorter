@@ -39,11 +39,8 @@ export function cliSort(config: SortingConfig) {
       importFile.sortedImports
     );
 
-    if (!config.dryRun) {
+    if (!config.dryRun || importsChanged(originalContent, newContent)) {
       FileUtils.saveFile(path, newContent);
-    }
-
-    if (importsChanged(originalContent, newContent)) {
       printSorted(path, newContent, config.printOutput);
     }
   }
@@ -63,6 +60,7 @@ function printSorted(path: string, newContent: string, printOutput: boolean | un
 // TODO: move somewhere?
 function replaceImports(content: string, startPosition: Position, endPosition: Position, newImports: string): string {
   const splitted = content.split(NEW_LINE);
-  splitted.splice(startPosition.line, endPosition.line + 1, ...newImports.split(NEW_LINE));
+  const deleteCount = endPosition.line - startPosition.line + 1;
+  splitted.splice(startPosition.line, deleteCount, ...newImports.split(NEW_LINE));
   return splitted.join(NEW_LINE);
 }
