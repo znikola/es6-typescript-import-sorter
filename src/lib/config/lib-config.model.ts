@@ -6,7 +6,7 @@ export const SORT_MODULES_DEFAULT = true;
 export const DRY_RUN_DEFAULT = false;
 export const DIRECTORY_PATH_DEFAULT = '.';
 export const FILES_DEFAULT: string[] = [];
-export const PRINT_OUTPUT_DEFAULT = true;
+export const PRINT_OUTPUT_DEFAULT = false;
 
 /**
  * The default sorting config
@@ -37,6 +37,6 @@ export interface SortingConfig {
   files?: string[];
   /** when set, it doesn't apply changes */
   dryRun?: boolean;
-  /** if set to true, all the sorted imports are going to be printed in the console */
+  /** if set to true, the content of the sorted files imports is going to be printed in the console */
   printOutput?: boolean;
 }

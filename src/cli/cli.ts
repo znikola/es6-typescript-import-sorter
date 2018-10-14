@@ -51,13 +51,13 @@ function importsChanged(originalContent: string, newContent: string): boolean {
 }
 
 function printSorted(path: string, newContent: string, printOutput: boolean | undefined): void {
+  LogUtils.info('Sorted: ', path);
   if (printOutput) {
-    LogUtils.info('Sorted: ', path);
     LogUtils.info(newContent);
   }
 }
 
-// TODO: move somewhere?
+// TODO: move to some other file?
 function replaceImports(content: string, startPosition: Position, endPosition: Position, newImports: string): string {
   const splitted = content.split(NEW_LINE);
   const deleteCount = endPosition.line - startPosition.line + 1;
