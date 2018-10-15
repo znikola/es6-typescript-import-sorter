@@ -23,14 +23,13 @@ export class FileUtils {
     return '';
   }
 
-  // TODO: doesn't work for recursive
   static readDirectory(directoryPath: string, recursive: boolean, filePaths?: string[]): string[] {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
     for (const f in files) {
       const name = directoryPath + path.sep + files[f];
       if (this.isDirectory(name) && recursive) {
-        this.readDirectory(name, recursive, filePaths);
+        filePaths = [...filePaths, ...this.readDirectory(name, recursive, filePaths)];
       } else {
         if (this.isValidFile(name)) {
           filePaths = [...filePaths, name];

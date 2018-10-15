@@ -16,7 +16,7 @@ TODO:
 
 ## Debugging the CLI
 
-- Temporarly add a call to `cliSort` function from `src/cli/index.ts` with a desired configuration, i.e.:
+- Temporarly add a call to `cliSort` function in `src/cli/index.ts` with a desired configuration, i.e.:
 
 ```
 cliSort({
