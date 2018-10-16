@@ -7,6 +7,7 @@ export const DRY_RUN_DEFAULT = false;
 export const DIRECTORY_PATH_DEFAULT = '.';
 export const FILES_DEFAULT: string[] = [];
 export const PRINT_OUTPUT_DEFAULT = false;
+export const PRINT_INFO_DEFAULT = false;
 
 /**
  * The default sorting config
@@ -39,4 +40,6 @@ export interface SortingConfig {
   dryRun?: boolean;
   /** if set to true, the content of the sorted files imports is going to be printed in the console */
   printOutput?: boolean;
+  /** if set to true, the cli will display and error message on failure */
+  info?: boolean;
 }
