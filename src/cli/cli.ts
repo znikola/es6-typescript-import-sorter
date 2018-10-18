@@ -51,8 +51,10 @@ export function cliSort(config: SortingConfig) {
       importFile.sortedImports
     );
 
-    if (!config.dryRun || importsChanged(originalContent, newContent)) {
-      FileUtils.saveFile(path, newContent);
+    if (importsChanged(originalContent, newContent)) {
+      if (!config.dryRun) {
+        FileUtils.saveFile(path, newContent);
+      }
       printSorted(path, newContent, config.printOutput);
     }
   }
