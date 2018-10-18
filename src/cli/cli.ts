@@ -6,8 +6,13 @@ import { ImportFile } from '../lib/models/import';
 import { NEW_LINE, Position } from '../lib/models/position';
 import { FileUtils } from '../lib/utils/file-utils';
 import { LogUtils } from '../lib/utils/log-utils';
+import { Util } from '../lib/utils/util';
 
 export function cliSort(config: SortingConfig) {
+  if (config.verbose) {
+    LogUtils.debug('Using the following configuration: ', JSON.stringify(config));
+  }
+
   let filePaths: string[] = [];
   if (config.files && config.files.length > 0) {
     // TODO: move to FileUtils
@@ -32,6 +37,13 @@ export function cliSort(config: SortingConfig) {
     };
 
     const importFile: ImportFile = sortImports(config);
+    if (Util.isFalsyObject(importFile)) {
+      if (config.verbose) {
+        LogUtils.debug('Imports not found in file: ', path);
+      }
+      continue;
+    }
+
     const newContent = replaceImports(
       originalContent,
       importFile.range.start,

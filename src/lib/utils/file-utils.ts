@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+
 import * as path from 'path';
 
 const UTF_8 = 'utf8';
@@ -29,7 +30,8 @@ export class FileUtils {
     for (const f in files) {
       const name = directoryPath + path.sep + files[f];
       if (this.isDirectory(name) && recursive) {
-        filePaths = [...filePaths, ...this.readDirectory(name, recursive, filePaths)];
+        const subDirFiles = this.readDirectory(name, recursive);
+        filePaths = [...filePaths, ...subDirFiles];
       } else {
         if (this.isValidFile(name)) {
           filePaths = [...filePaths, name];

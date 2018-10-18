@@ -7,6 +7,7 @@ export const DRY_RUN_DEFAULT = false;
 export const DIRECTORY_PATH_DEFAULT = '.';
 export const FILES_DEFAULT: string[] = [];
 export const PRINT_OUTPUT_DEFAULT = false;
+export const VERBOSE_DEFAULT = false;
 
 /**
  * The default sorting config
@@ -19,6 +20,7 @@ export class DefaultSortingConfig implements SortingConfig {
   files = FILES_DEFAULT;
   dryRun = DRY_RUN_DEFAULT;
   printOutput = PRINT_OUTPUT_DEFAULT;
+  verbose = VERBOSE_DEFAULT;
 }
 
 /**
@@ -39,4 +41,6 @@ export interface SortingConfig {
   dryRun?: boolean;
   /** if set to true, the content of the sorted files imports is going to be printed in the console */
   printOutput?: boolean;
+  /** prints more details */
+  verbose?: boolean;
 }

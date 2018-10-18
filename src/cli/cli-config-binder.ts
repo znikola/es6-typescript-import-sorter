@@ -8,7 +8,8 @@ import {
   FILES_DEFAULT,
   SORT_MODULES_DEFAULT,
   CONTENT_DEFAULT,
-  PRINT_OUTPUT_DEFAULT
+  PRINT_OUTPUT_DEFAULT,
+  VERBOSE_DEFAULT
 } from '../lib/config/lib-config.model';
 
 export class CliConfigUtil {
@@ -19,7 +20,8 @@ export class CliConfigUtil {
     private modulesOption: string,
     private filesOption: string,
     private dryRunOption: string,
-    private printOutputOption: string
+    private printOutputOption: string,
+    private verboseOption: string
   ) {}
 
   createConfig(): SortingConfig {
@@ -30,6 +32,7 @@ export class CliConfigUtil {
     const files = this.filesConfig(this.filesOption);
     const dryRun = this.dryRunConfig(this.dryRunOption);
     const printOutput = this.printOutputConfig(this.printOutputOption);
+    const verbose = this.verboseConfig(this.verboseOption);
 
     return {
       content,
@@ -38,7 +41,8 @@ export class CliConfigUtil {
       sortModules,
       files,
       dryRun,
-      printOutput
+      printOutput,
+      verbose
     };
   }
 
@@ -71,6 +75,10 @@ export class CliConfigUtil {
 
   private printOutputConfig(printOutput: string): boolean {
     return this.toBoolean(printOutput, PRINT_OUTPUT_DEFAULT);
+  }
+
+  private verboseConfig(verbose: string): boolean {
+    return this.toBoolean(verbose, VERBOSE_DEFAULT);
   }
 
   // TODO: 'x.ts, x2.ts' doesn't work because of space after the comma
