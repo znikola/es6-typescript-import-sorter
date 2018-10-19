@@ -27,8 +27,8 @@ export class FileUtils {
   static readDirectory(directoryPath: string, recursive: boolean, filePaths?: string[]): string[] {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
-    for (const f in files) {
-      const name = directoryPath + path.sep + files[f];
+    for (const f of files) {
+      const name = directoryPath + path.sep + f;
       if (this.isDirectory(name) && recursive) {
         const subDirFiles = this.readDirectory(name, recursive);
         filePaths = [...filePaths, ...subDirFiles];
