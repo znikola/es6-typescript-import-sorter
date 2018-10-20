@@ -20,7 +20,7 @@ export function run(): void {
     .option('-f, --files <files>', 'specify a comma-separated list of files to sort imports in ')
     .option('-D, --dry-run', 'a flag to not apply any changes')
     .option('-o, --print-output', 'prints sorted files to the console')
-    .option('-i, --info', 'display error information')
+    .option('-i, --info', 'display error information for debugging')
     .parse(process.argv);
 
   const config: SortingConfig = new CliConfigUtil(
@@ -44,9 +44,12 @@ export function run(): void {
       if (error instanceof SortError) {
         // Log error
         LogUtils.error(error.errorMessage ? error.errorMessage : error.error.message);
+      } else {
+        LogUtils.error(error.message);
       }
+    } else {
+      LogUtils.error('An error occured, use --info for more informations');
     }
-    LogUtils.error('An error occured, use --info for more informations');
     // Exit with failure
     process.exit(1);
   }
