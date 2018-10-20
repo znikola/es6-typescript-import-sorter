@@ -1,5 +1,6 @@
 'use strict';
 
+import { SortingConfig } from '../config/lib-config.model';
 import { Import } from '../models/import';
 import { Position, NEW_LINE } from '../models/position';
 import { ImportUtils } from '../utils/import-util';
@@ -9,10 +10,12 @@ const ES6_IMPORTS_REGEX = /^import(?:["'\s]*(?:[\w*{}\n\r\t, ]+)from\s*)?(["'\s]
 // extracted from ES6_IMPORTS_REGEX. Because of how JavaScript's regex engine is implemented (https://stackoverflow.com/a/27131524/5252849), we have to extract it separatley.
 const ES6_FROM_REGEX = /([@\w\/\_\-.]+)/gm;
 
-export function parse(content: string): Import[] {
-  if (!content) {
+export function parse(config: SortingConfig): Import[] {
+  if (config && !config.content) {
     return [];
   }
+
+  const content = config.content;
 
   ES6_IMPORTS_REGEX.lastIndex = 0;
   let imports: Import[] = [];
