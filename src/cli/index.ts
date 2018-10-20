@@ -7,19 +7,20 @@ import { SortError } from '../lib/models/errors';
 import { LogUtils } from '../lib/utils/log-utils';
 
 import { cliSort } from './cli';
-import { CliConfigUtil } from './cli-config-util';
+import { CliConfigUtil } from './cli-config-binder';
 
 export function run(): void {
   program
     .version('1.0.0-alpha.4')
-    .description('ES6 and TypeScript import sorter')
+    .description('An opinionated ES6 and TypeScript import sorter')
     .option('-c, --content <content>', 'specfiy imports inline')
     .option('-d, --directory <path>', 'specify a path to directory')
     .option('-r, --recursive', 'walk recursively in the specified directory')
     .option('-m, --modules', 'sort modules')
     .option('-f, --files <files>', 'specify a comma-separated list of files to sort imports in ')
     .option('-D, --dry-run', 'a flag to not apply any changes')
-    .option('-o, --print-output', 'prints sorted files to the console')
+    .option('-o, --print-sorted-content', 'prints sorted files to the console')
+    .option('-v, --verbose', 'prints more details')
     .option('-i, --info', 'display error information for debugging')
     .parse(process.argv);
 
@@ -31,6 +32,7 @@ export function run(): void {
     program.files,
     program.dryRun,
     program.printOutput,
+    program.verbose,
     program.info
   ).createConfig();
 

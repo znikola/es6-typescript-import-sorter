@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+
 import * as path from 'path';
 
 import { SortError } from '../models/errors';
@@ -28,11 +29,12 @@ export class FileUtils {
   static readDirectory(directoryPath: string, recursive: boolean, filePaths?: string[]): string[] {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
-    for (const f in files) {
+    for (const f of files) {
       try {
-        const name = directoryPath + path.sep + files[f];
+        const name = directoryPath + path.sep + f;
         if (this.isDirectory(name) && recursive) {
-          filePaths = [...filePaths, ...this.readDirectory(name, recursive, filePaths)];
+          const subDirFiles = this.readDirectory(name, recursive);
+          filePaths = [...filePaths, ...subDirFiles];
         } else {
           if (this.isValidFile(name)) {
             filePaths = [...filePaths, name];

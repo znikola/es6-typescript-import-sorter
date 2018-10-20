@@ -9,6 +9,7 @@ import {
   SORT_MODULES_DEFAULT,
   CONTENT_DEFAULT,
   PRINT_OUTPUT_DEFAULT,
+  VERBOSE_DEFAULT,
   PRINT_INFO_DEFAULT
 } from '../lib/config/lib-config.model';
 
@@ -21,6 +22,7 @@ export class CliConfigUtil {
     private filesOption: string,
     private dryRunOption: string,
     private printOutputOption: string,
+    private verboseOption: string,
     private infoOption: string
   ) {}
 
@@ -32,6 +34,7 @@ export class CliConfigUtil {
     const files = this.filesConfig(this.filesOption);
     const dryRun = this.dryRunConfig(this.dryRunOption);
     const printOutput = this.printOutputConfig(this.printOutputOption);
+    const verbose = this.verboseConfig(this.verboseOption);
     const info = this.printInfoConfig(this.infoOption);
 
     return {
@@ -42,6 +45,7 @@ export class CliConfigUtil {
       files,
       dryRun,
       printOutput,
+      verbose,
       info
     };
   }
@@ -79,6 +83,10 @@ export class CliConfigUtil {
 
   private printInfoConfig(printInfo: string): boolean {
     return this.toBoolean(printInfo, PRINT_INFO_DEFAULT);
+  }
+  
+  private verboseConfig(verbose: string): boolean {
+    return this.toBoolean(verbose, VERBOSE_DEFAULT);
   }
 
   // TODO: 'x.ts, x2.ts' doesn't work because of space after the comma

@@ -1,5 +1,7 @@
 'use strict';
 
+import { Util } from '../lib/utils/util';
+
 import { SortingConfig } from './config';
 
 import { groupImports } from './core/group-imports';
@@ -20,6 +22,10 @@ export function sortImports(config: SortingConfig): ImportFile {
   const sorted: Import[] = sort(imports, config);
   const grouped: ImportGroup[] = groupImports(sorted, config);
   const { range, text } = prepareForWrite(grouped, imports);
+
+  if (Util.isFalsyObject(range)) {
+    return <ImportFile>{};
+  }
 
   return {
     sortedImports: text,
