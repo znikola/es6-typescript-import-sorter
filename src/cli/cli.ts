@@ -25,7 +25,7 @@ export function cliSort(config: SortingConfig) {
           LogUtils.warn(`Skipping, file doesn't exist: `, path);
         }
       } catch (error) {
-        throw(new SortError(error, `${error} 🛑 While reading file : ${path}`, path ));
+        throw(new SortError(`${error} 🛑 While reading file : ${path}`, error, path ));
       }
     }
   } else if (config.directoryPath) {
@@ -64,7 +64,7 @@ export function cliSort(config: SortingConfig) {
         printSorted(path, newContent, config.printOutput);
       }
     } catch (error) {
-      throw(new SortError(error, `${error} 🛑 On file : ${path}`, path ));
+      throw(new SortError(`${error} 🛑 On file : ${path}`, error, path ));
     }
   }
 }

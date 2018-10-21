@@ -20,8 +20,7 @@ export function run(): void {
     .option('-f, --files <files>', 'specify a comma-separated list of files to sort imports in ')
     .option('-D, --dry-run', 'a flag to not apply any changes')
     .option('-o, --print-sorted-content', 'prints sorted files to the console')
-    .option('-v, --verbose', 'prints more details')
-    .option('-i, --info', 'display error information for debugging')
+    .option('-v, --verbose', 'prints more details and detailed error messages')
     .parse(process.argv);
 
   const config: SortingConfig = new CliConfigUtil(
@@ -33,28 +32,29 @@ export function run(): void {
     program.dryRun,
     program.printOutput,
     program.verbose,
-    program.info
   ).createConfig();
-
-  console.log(config);
 
   LogUtils.info('=========*** Sorting imports... ***=========');
   try {
   cliSort(config);
   } catch (error) {
-    if (config.info) {
-      if (error instanceof SortError) {
-        // Log error
-        LogUtils.error(error.errorMessage ? error.errorMessage : error.error.message);
-      } else {
-        LogUtils.error(error.message);
-      }
-    } else {
-      LogUtils.error('An error occured, use --info for more informations');
-    }
-    // Exit with failure
-    process.exit(1);
+    handleErrors(error, config);
   }
 
   LogUtils.info('================*** Done ***================');
+}
+
+function handleErrors(error: Error | SortError, config: SortingConfig) {
+  if (config.verbose) {
+    if (error instanceof SortError) {
+      // Log error
+      LogUtils.error(error.errorMessage);
+    } else {
+      LogUtils.error(error.message);
+    }
+  } else {
+    LogUtils.error('An error occured, use --verbose for more informations');
+  }
+  // Exit with failure
+  process.exit(1);
 }

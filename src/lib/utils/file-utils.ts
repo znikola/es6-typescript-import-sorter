@@ -41,7 +41,7 @@ export class FileUtils {
           }
         }
       } catch (error) {
-        throw(new SortError(error, `${error} 🛑 While reading directory : ${f}`, f ));
+        throw(new SortError(`${error} 🛑 While reading directory : ${f}`, error, f ));
       }
     }
     return filePaths;

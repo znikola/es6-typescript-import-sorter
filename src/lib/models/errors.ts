@@ -1,9 +1,11 @@
+'use strict';
+
 export class SortError extends Error {
-  error: Error;
-  errorMessage: string | undefined;
+  errorMessage: string;
+  error: Error | undefined;
   path: string | undefined;
 
-  constructor(error: Error, message?: string, path?: string) {
+  constructor(message: string, error?: Error, path?: string) {
     super();
     this.error = error;
     this.errorMessage = message;

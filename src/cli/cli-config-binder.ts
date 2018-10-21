@@ -9,8 +9,7 @@ import {
   SORT_MODULES_DEFAULT,
   CONTENT_DEFAULT,
   PRINT_OUTPUT_DEFAULT,
-  VERBOSE_DEFAULT,
-  PRINT_INFO_DEFAULT
+  VERBOSE_DEFAULT
 } from '../lib/config/lib-config.model';
 
 export class CliConfigUtil {
@@ -22,8 +21,7 @@ export class CliConfigUtil {
     private filesOption: string,
     private dryRunOption: string,
     private printOutputOption: string,
-    private verboseOption: string,
-    private infoOption: string
+    private verboseOption: string
   ) {}
 
   createConfig(): SortingConfig {
@@ -35,7 +33,6 @@ export class CliConfigUtil {
     const dryRun = this.dryRunConfig(this.dryRunOption);
     const printOutput = this.printOutputConfig(this.printOutputOption);
     const verbose = this.verboseConfig(this.verboseOption);
-    const info = this.printInfoConfig(this.infoOption);
 
     return {
       content,
@@ -45,8 +42,7 @@ export class CliConfigUtil {
       files,
       dryRun,
       printOutput,
-      verbose,
-      info
+      verbose
     };
   }
 
@@ -79,10 +75,6 @@ export class CliConfigUtil {
 
   private printOutputConfig(printOutput: string): boolean {
     return this.toBoolean(printOutput, PRINT_OUTPUT_DEFAULT);
-  }
-
-  private printInfoConfig(printInfo: string): boolean {
-    return this.toBoolean(printInfo, PRINT_INFO_DEFAULT);
   }
   
   private verboseConfig(verbose: string): boolean {
