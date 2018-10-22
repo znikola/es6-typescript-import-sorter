@@ -31,16 +31,14 @@ export class FileUtils {
     const files = fs.readdirSync(directoryPath);
     for (const f of files) {
       try {
-        const name = directoryPath + path.sep + f;
-        if (this.isDirectory(name) && recursive) {
-          const subDirFiles = this.readDirectory(name, recursive);
-          filePaths = [...filePaths, ...subDirFiles];
-        } else {
-          if (this.isValidFile(name)) {
-            filePaths = [...filePaths, name];
-          }
-        }
-      } catch (error) {
+      const name = path.join(directoryPath, f);
+      if (this.isDirectory(name) && recursive) {
+        const subDirFiles = this.readDirectory(name, recursive);
+        filePaths = [...filePaths, ...subDirFiles];
+      } else if (this.isValidFile(name)) {
+        filePaths = [...filePaths, name];
+      }
+      } catch(error) {
         throw(new SortError(`${error} 🛑 While reading directory : ${f}`, error, f ));
       }
     }
