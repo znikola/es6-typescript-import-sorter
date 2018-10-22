@@ -28,14 +28,12 @@ export class FileUtils {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
     for (const f of files) {
-      const name = directoryPath + path.sep + f;
+      const name = path.join(directoryPath, f);
       if (this.isDirectory(name) && recursive) {
         const subDirFiles = this.readDirectory(name, recursive);
         filePaths = [...filePaths, ...subDirFiles];
-      } else {
-        if (this.isValidFile(name)) {
-          filePaths = [...filePaths, name];
-        }
+      } else if (this.isValidFile(name)) {
+        filePaths = [...filePaths, name];
       }
     }
     return filePaths;
