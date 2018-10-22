@@ -1,5 +1,6 @@
 'use strict';
 
+// Defaults
 export const CONTENT_DEFAULT = '';
 export const RECURSIVE_DEFAULT = true;
 export const SORT_MODULES_DEFAULT = true;
@@ -8,6 +9,16 @@ export const DIRECTORY_PATH_DEFAULT = '.';
 export const FILES_DEFAULT: string[] = [];
 export const PRINT_OUTPUT_DEFAULT = false;
 export const VERBOSE_DEFAULT = false;
+
+// Flags
+export const CONTENT_FLAG = { short: '-c', long: '--content' };
+export const RECURSIVE_FLAG = { short: '-r', long: '--recursive' };
+export const SORT_MODULES_FLAG = { short: '-m', long: '--modules' };
+export const DRY_RUN_FLAG = { short: '-D', long: '--dry-run' };
+export const DIRECTORY_PATH_FLAG = { short: '-d', long: '--directory' };
+export const FILES_FLAG = { short: '-f', long: '--files' };
+export const PRINT_OUTPUT_FLAG = { short: '-o', long: '--print-sorted-content' };
+export const VERBOSE_FLAG = { short: '-v', long: '--verbose' };
 
 /**
  * The default sorting config
