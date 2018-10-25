@@ -49,12 +49,14 @@ export function run(): void {
   cliSort(config);
   } catch (error) {
     handleErrors(error, config);
+    // Exit with failure
+    process.exit(1);
   }
 
   LogUtils.info('================*** Done ***================');
 }
 
-function handleErrors(error: Error | SortError, config: SortingConfig) {
+function handleErrors(error: Error | SortError, config: SortingConfig): void {
   if (config.verbose) {
     if (error instanceof SortError) {
       // Log error
@@ -65,6 +67,4 @@ function handleErrors(error: Error | SortError, config: SortingConfig) {
   } else {
     LogUtils.error(`An error occured, use ${VERBOSE_FLAG.long} for more informations`);
   }
-  // Exit with failure
-  process.exit(1);
 }
