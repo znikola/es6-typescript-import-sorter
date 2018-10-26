@@ -2,6 +2,7 @@
 
 import { sortImports } from '../lib';
 import { SortingConfig } from '../lib/config/lib-config.model';
+import { SortError } from '../lib/models/errors';
 import { ImportFile } from '../lib/models/import';
 import { NEW_LINE, Position } from '../lib/models/position';
 import { FileUtils } from '../lib/utils/file-utils';
@@ -17,10 +18,14 @@ export function cliSort(config: SortingConfig) {
   if (config.files && config.files.length > 0) {
     // TODO: move to FileUtils
     for (const path of config.files) {
-      if (FileUtils.isFile(path) && FileUtils.isValidFile(path)) {
-        filePaths = [...filePaths, path];
-      } else {
-        LogUtils.warn(`Skipping, file doesn't exist: `, path);
+      try {
+        if (FileUtils.isFile(path) && FileUtils.isValidFile(path)) {
+          filePaths = [...filePaths, path];
+        } else {
+          LogUtils.warn(`Skipping, file doesn't exist: `, path);
+        }
+      } catch (error) {
+        throw(new SortError(`${error} 🛑 While reading file : ${path}`, error, path ));
       }
     }
   } else if (config.directoryPath) {
@@ -30,32 +35,36 @@ export function cliSort(config: SortingConfig) {
   }
 
   for (const path of filePaths) {
-    const originalContent = FileUtils.readFile(path);
-    config = {
-      ...config,
-      content: originalContent
-    };
-
-    const importFile: ImportFile = sortImports(config);
-    if (Util.isFalsyObject(importFile)) {
-      if (config.verbose) {
-        LogUtils.debug('Imports not found in file: ', path);
+    try {
+      const originalContent = FileUtils.readFile(path);
+      config = {
+        ...config,
+        content: originalContent
+      };
+  
+      const importFile: ImportFile = sortImports(config);
+      if (Util.isFalsyObject(importFile)) {
+        if (config.verbose) {
+          LogUtils.debug('Imports not found in file: ', path);
+        }
+        continue;
       }
-      continue;
-    }
-
-    const newContent = replaceImports(
-      originalContent,
-      importFile.range.start,
-      importFile.range.end,
-      importFile.sortedImports
-    );
-
-    if (importsChanged(originalContent, newContent)) {
-      if (!config.dryRun) {
-        FileUtils.saveFile(path, newContent);
+  
+      const newContent = replaceImports(
+        originalContent,
+        importFile.range.start,
+        importFile.range.end,
+        importFile.sortedImports
+      );
+  
+      if (importsChanged(originalContent, newContent)) {
+        if (!config.dryRun) {
+          FileUtils.saveFile(path, newContent);
+        }
+        printSorted(path, newContent, config.printOutput);
       }
-      printSorted(path, newContent, config.printOutput);
+    } catch (error) {
+      throw(new SortError(`${error} 🛑 On file : ${path}`, error, path ));
     }
   }
 }

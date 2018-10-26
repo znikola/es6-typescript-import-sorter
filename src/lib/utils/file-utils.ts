@@ -2,6 +2,8 @@ import * as fs from 'fs';
 
 import * as path from 'path';
 
+import { SortError } from '../models/errors';
+
 const UTF_8 = 'utf8';
 const TYPESCRIPT_EXTENSION = 'ts';
 const JAVASCRIPT_EXTENSION = 'js';
@@ -28,12 +30,16 @@ export class FileUtils {
     filePaths = filePaths || [];
     const files = fs.readdirSync(directoryPath);
     for (const f of files) {
+      try {
       const name = path.join(directoryPath, f);
       if (this.isDirectory(name) && recursive) {
         const subDirFiles = this.readDirectory(name, recursive);
         filePaths = [...filePaths, ...subDirFiles];
       } else if (this.isValidFile(name)) {
         filePaths = [...filePaths, name];
+      }
+      } catch(error) {
+        throw(new SortError(`${error} 🛑 While reading directory : ${f}`, error, f ));
       }
     }
     return filePaths;

@@ -76,7 +76,7 @@ export class CliConfigUtil {
   private printOutputConfig(printOutput: string): boolean {
     return this.toBoolean(printOutput, PRINT_OUTPUT_DEFAULT);
   }
-
+  
   private verboseConfig(verbose: string): boolean {
     return this.toBoolean(verbose, VERBOSE_DEFAULT);
   }
