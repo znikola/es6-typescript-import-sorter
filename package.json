@@ -1,6 +1,6 @@
 {
   "name": "import-sorter",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "An opinionated ES6 and TypeScript import sorter.",
   "main": "dist/lib/index.js",
   "types": "dist/import-sorter.d.ts",
@@ -43,8 +43,8 @@
   "devDependencies": {
     "@types/node": "^10.11.3",
     "prettier": "1.14.3",
+    "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1",
-    "rimraf": "^2.6.2"
+    "typescript": "^3.1.1"
   }
 }
