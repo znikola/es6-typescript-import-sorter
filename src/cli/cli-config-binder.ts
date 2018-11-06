@@ -58,11 +58,11 @@ export class CliConfigUtil {
   }
 
   private recursiveConfig(recursive: string): boolean {
-    return this.toBoolean(recursive, RECURSIVE_DEFAULT);
+    return this.toBoolean(recursive, Boolean(RECURSIVE_DEFAULT));
   }
 
   private modulesConfig(modules: string): boolean {
-    return this.toBoolean(modules, SORT_MODULES_DEFAULT);
+    return this.toBoolean(modules, Boolean(SORT_MODULES_DEFAULT));
   }
 
   private filesConfig(files: string): string[] {
@@ -70,15 +70,15 @@ export class CliConfigUtil {
   }
 
   private dryRunConfig(dryRun: string): boolean {
-    return this.toBoolean(dryRun, DRY_RUN_DEFAULT);
+    return this.toBoolean(dryRun, Boolean(DRY_RUN_DEFAULT));
   }
 
   private printOutputConfig(printOutput: string): boolean {
-    return this.toBoolean(printOutput, PRINT_OUTPUT_DEFAULT);
+    return this.toBoolean(printOutput, Boolean(PRINT_OUTPUT_DEFAULT));
   }
-  
+
   private verboseConfig(verbose: string): boolean {
-    return this.toBoolean(verbose, VERBOSE_DEFAULT);
+    return this.toBoolean(verbose, Boolean(VERBOSE_DEFAULT));
   }
 
   // TODO: 'x.ts, x2.ts' doesn't work because of space after the comma

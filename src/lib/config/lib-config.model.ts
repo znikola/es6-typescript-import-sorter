@@ -2,13 +2,13 @@
 
 // Defaults
 export const CONTENT_DEFAULT = '';
-export const RECURSIVE_DEFAULT = true;
-export const SORT_MODULES_DEFAULT = true;
-export const DRY_RUN_DEFAULT = false;
+export const RECURSIVE_DEFAULT = 1;
+export const SORT_MODULES_DEFAULT = 1;
+export const DRY_RUN_DEFAULT = 0;
 export const DIRECTORY_PATH_DEFAULT = '.';
 export const FILES_DEFAULT: string[] = [];
-export const PRINT_OUTPUT_DEFAULT = false;
-export const VERBOSE_DEFAULT = false;
+export const PRINT_OUTPUT_DEFAULT = 0;
+export const VERBOSE_DEFAULT = 0;
 
 // Flags
 export const CONTENT_FLAG = { short: '-c', long: '--content' };
@@ -26,12 +26,12 @@ export const VERBOSE_FLAG = { short: '-v', long: '--verbose' };
 export class DefaultSortingConfig implements SortingConfig {
   content = CONTENT_DEFAULT;
   directoryPath = DIRECTORY_PATH_DEFAULT;
-  recursive = RECURSIVE_DEFAULT;
-  sortModules = SORT_MODULES_DEFAULT;
+  recursive = Boolean(RECURSIVE_DEFAULT);
+  sortModules = Boolean(SORT_MODULES_DEFAULT);
   files = FILES_DEFAULT;
-  dryRun = DRY_RUN_DEFAULT;
-  printOutput = PRINT_OUTPUT_DEFAULT;
-  verbose = VERBOSE_DEFAULT;
+  dryRun = Boolean(DRY_RUN_DEFAULT);
+  printOutput = Boolean(PRINT_OUTPUT_DEFAULT);
+  verbose = Boolean(VERBOSE_DEFAULT);
 }
 
 /**

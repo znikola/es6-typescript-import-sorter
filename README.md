@@ -1,3 +1,7 @@
+# Import sorter
+
+An opinionated ES6 and TypeScript import sorter.
+
 TODO:
 
 # Ts config json
@@ -13,6 +17,15 @@ TODO:
 * whenever you make a change, it will automatically be picked up by `tsc`
 * Quick and dirty way to run cli version: `./node_modules/.bin/ts-node ./bin/index.js`
 * `yarn build:prod` for a production build
+
+- To test the newest library (not yet published) in another project, do `yarn link`. Then, in the other project run `yarn link import-sorter`. After this, you will be able to
+
+```
+import { sortImports } from 'import-sorter';
+const result = sortImports(...);
+```
+
+After testing, make sure to unlink import-sorter, by navigating to it and `yarn unlink`
 
 ## Debugging the CLI
 
